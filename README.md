@@ -1,4 +1,77 @@
-Shakespearean Text Generation with SimpleRNNThis repository contains a Deep Learning project that utilizes a Recurrent Neural Network (RNN) to generate text in the distinct literary style of William Shakespeare. By training on a comprehensive collection of his plays, the model learns to predict the next word in a sequence, effectively mimicking 16th-century prose.📌 Project OverviewThe goal of this project is to build a language model capable of "writing" like the Bard. Using TensorFlow and Keras, the model processes raw theatrical dialogue, tokenizes the vocabulary, and employs a hidden state memory (SimpleRNN) to capture the sequential dependencies inherent in English literature.📊 DatasetThe project uses the Shakespeare Plays dataset sourced from Kaggle via kagglehub.Source: kingburrito666/shakespeare-playsContent: The dataset includes over 111,000 lines of text from various plays (e.g., Henry IV, Hamlet, Macbeth).Key Features: Focuses primarily on the PlayerLine column, which contains the actual dialogue spoken by characters.⚙️ MethodologyThe pipeline follows a standard NLP workflow for sequence modeling:Data Preprocessing:Cleaning: All text is converted to lowercase and stripped of special characters/punctuation using Regex to simplify the vocabulary.Tokenization: The Tokenizer class maps unique words to integer IDs, creating a word-to-index dictionary.Sequence Engineering:Implemented a Sliding Window approach with a sequence length of 5.The model takes 5 words as input ($X$) and learns to predict the 6th word ($y$).The target labels ($y$) are converted to categorical format via One-Hot Encoding.Model Architecture:Embedding Layer: Maps word indices into a 100-dimensional dense vector space.SimpleRNN Layer: A recurrent layer with 150 units to process the sequence and maintain temporal information.Dense Layer: A Softmax output layer with a size equal to the vocab_size to provide probability distributions for the next word.📈 ResultsThe model is designed to minimize Categorical Cross-Entropy loss using the Adam optimizer. While a SimpleRNN is a basic building block, it demonstrates the ability to capture short-term dependencies and common Shakespearean word pairings.Note: For longer, more coherent passages, this project can be extended using LSTM or GRU layers to mitigate the vanishing gradient problem.🛠️ Technologies UsedLanguage: PythonDeep Learning Framework: TensorFlow / KerasData Manipulation: Pandas, NumPyData Acquisition: KaggleHubText Processing: Regular Expressions (re)▶️ How to Run the NotebookClone the Repository:Bashgit clone <repo-link>
-cd <repo>
-Install Dependencies:Bashpip install tensorflow pandas numpy kagglehub
-Run the Notebook:Open Shakespear_RNN.ipynb in Google Colab or Jupyter Notebook. Ensure you have a Kaggle API token configured if downloading the dataset for the first time.
+# 🎭 The Bard Bot: Shakespearean Text Generation
+
+[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)](https://www.tensorflow.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+
+This project leverages **Recurrent Neural Networks (RNNs)** to generate text in the unmistakable literary style of William Shakespeare. By training on over 100,000 lines of dialogue, the model captures the essence of 16th-century prose through word-level sequence prediction.
+
+---
+
+## 📌 Project Overview
+The core objective is to simulate the creative process of "the Bard." Using **TensorFlow** and **Keras**, the model processes raw theatrical dialogue and employs a hidden-state memory (SimpleRNN) to learn the sequential dependencies and rhythmic patterns unique to Shakespearean English.
+
+---
+
+## 📊 Dataset Insights
+The model is powered by the **Shakespeare Plays** dataset, a comprehensive collection of his theatrical works.
+
+| Feature | Details |
+| :--- | :--- |
+| **Source** | `kingburrito666/shakespeare-plays` (Kaggle) |
+| **Size** | 111,000+ lines of dialogue |
+| **Key Plays** | *Henry IV*, *Hamlet*, *Macbeth*, and more |
+| **Target Feature** | `PlayerLine` (The spoken dialogue) |
+
+---
+
+## ⚙️ The Methodology
+The pipeline follows a rigorous NLP workflow designed for high-fidelity sequence modeling.
+
+### 1. Data Preprocessing
+* **Text Sanitization**: Conversion to lowercase and removal of special characters via Regex.
+* **Tokenization**: Mapping unique vocabulary to specific integer IDs using the `Tokenizer` class.
+
+### 2. Sequence Engineering
+We utilize a **Sliding Window** approach to create our training samples:
+* **Input Sequence**: 5 consecutive words ($X$).
+* **Target Label**: The subsequent 6th word ($y$).
+* **Encoding**: Target labels are transformed via **One-Hot Encoding** for categorical compatibility.
+
+### 3. Model Architecture
+> **The Neural Engine**
+> * **Embedding Layer**: Maps indices to a 100-dimensional dense vector space.
+> * **SimpleRNN Layer**: 150 hidden units to process temporal information.
+> * **Dense Output**: Softmax activation across the entire `vocab_size`.
+
+---
+
+## 📈 Results & Observations
+The model is optimized using **Adam** and **Categorical Cross-Entropy**. 
+
+* **Capabilities**: Successfully captures short-term dependencies and common word pairings (e.g., "thou art").
+* **Optimization**: While effective, the SimpleRNN structure provides a foundation that can be further enhanced.
+
+> [!TIP]
+> **Future Roadmap**: To generate longer, more coherent passages, consider evolving this architecture into an **LSTM** or **GRU** to mitigate the vanishing gradient problem.
+
+---
+
+## 🛠️ Tech Stack
+* **Language**: ![Python](https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54)
+* **ML Framework**: ![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=flat&logo=TensorFlow&logoColor=white)
+* **Data Science**: ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=flat&logo=pandas&logoColor=white) ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=flat&logo=numpy&logoColor=white)
+* **Environment**: Google Colab / T4 GPU
+
+---
+
+## ▶️ Getting Started
+
+### 1. Setup
+```bash
+# Clone the repository
+git clone <your-repo-link>
+cd <repo-name>
+
+# Install required dependencies
+pip install tensorflow pandas numpy kagglehub
